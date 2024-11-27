@@ -237,7 +237,7 @@ def get_avatar_url(
     Steam players can have an avatar
     GamePass players will get a default avatar
     """
-    if len(player_id) == 17:
+    if len(player_id) == 17 and player_id.isdigit():
         try:
             return get_steam_avatar(player_id)
         except Exception:
@@ -252,7 +252,7 @@ def get_external_profile_url(
     """
     Constructs the external profile url for Steam or GamePass
     """
-    if len(player_id) == 17:
+    if len(player_id) == 17 and player_id.isdigit():
         ext_profile_url = f"{STEAM_PROFILE_INFO_URL}{player_id}"
     elif len(player_id) > 17:
         gamepass_pseudo_url = player_name.replace(" ", "-")
