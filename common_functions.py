@@ -242,7 +242,7 @@ def get_avatar_url(
             return get_steam_avatar(player_id)
         except Exception:
             return DEFAULT_AVATAR_STEAM
-    return DEFAULT_AVATAR_STEAM
+    return DEFAULT_AVATAR_GAMEPASS
 
 
 def get_external_profile_url(
