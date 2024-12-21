@@ -33,12 +33,12 @@ from rcon.utils import get_server_number
 
 # Discord : embed author icon
 DISCORD_EMBED_AUTHOR_ICON_URL = (
-    "https://styles.redditmedia.com/t5_3ejz4/styles/communityIcon_x51js3a1fr0b1.png"
+    ""
 )
 
 # Discord : default avatars
 DEFAULT_AVATAR_STEAM = (
-    "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/b5/b5bd56c1aa4644a474a2e4972be27ef9e82e517e_medium.jpg"
+    "https://cdn.discordapp.com/icons/316459644476456962/73a28de670af9e6569f231c9385398f3.webp?size=64"
 )
 DEFAULT_AVATAR_GAMEPASS = (
     "https://sc.filehippo.net/images/t_app-logo-l,f_auto,dpr_auto/p/2cf512ee-a9da-11e8-8bdc-02420a000abe/3169937124/xbox-game-pass-logo"
