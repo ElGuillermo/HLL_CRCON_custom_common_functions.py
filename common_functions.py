@@ -41,7 +41,7 @@ DEFAULT_AVATAR_STEAM = (
     "https://cdn.discordapp.com/icons/316459644476456962/73a28de670af9e6569f231c9385398f3.webp?size=64"
 )
 DEFAULT_AVATAR_GAMEPASS = (
-    "https://sc.filehippo.net/images/t_app-logo-l,f_auto,dpr_auto/p/2cf512ee-a9da-11e8-8bdc-02420a000abe/3169937124/xbox-game-pass-logo"
+    "https://raw.githubusercontent.com/ElGuillermo/HLL_CRCON_custom_common_functions.py/refs/heads/main/avatar_default_nonsteam.png"
 )
 
 # Discord : external profile infos urls
