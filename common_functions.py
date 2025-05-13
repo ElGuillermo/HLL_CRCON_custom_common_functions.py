@@ -33,12 +33,12 @@ from rcon.utils import get_server_number
 
 # Discord : embed author icon
 DISCORD_EMBED_AUTHOR_ICON_URL = (
-    ""
+    "https://cdn.discordapp.com/icons/316459644476456962/73a28de670af9e6569f231c9385398f3.webp?size=64"
 )
 
 # Discord : default avatars
 DEFAULT_AVATAR_STEAM = (
-    "https://cdn.discordapp.com/icons/316459644476456962/73a28de670af9e6569f231c9385398f3.webp?size=64"
+    "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/b5/b5bd56c1aa4644a474a2e4972be27ef9e82e517e_medium.jpg"
 )
 DEFAULT_AVATAR_GAMEPASS = (
     "https://raw.githubusercontent.com/ElGuillermo/HLL_CRCON_custom_common_functions.py/refs/heads/main/avatar_default_nonsteam.png"
@@ -48,7 +48,7 @@ DEFAULT_AVATAR_GAMEPASS = (
 STEAM_PROFILE_INFO_URL = "https://steamcommunity.com/profiles/"  # + id
 GAMEPASS_PROFILE_INFO_URL = "https://xboxgamertag.com/search/"  # + name (spaces are replaced by -)
 
-# Team related (as set in /settings/rcon-server)
+# Clan related (as set in /settings/rcon-server)
 try:
     config = RconServerSettingsUserConfig.load_from_db()
     CLAN_URL = str(config.discord_invite_url)
@@ -147,6 +147,10 @@ WEAPONS_MG = [  # watch_killrate.py
     # GB
     "Lewis Gun"
 ]
+
+OFFICERS = {'armycommander', 'officer', 'tankcommander', 'spotter'}
+
+SUPPORT_CANDIDATES = {'antitank', 'automaticrifleman', 'assault', 'heavymachinegunner', 'rifleman', 'engineer', 'medic'}
 
 
 # (End of configuration)
@@ -308,7 +312,7 @@ def get_steam_avatar(
 def green_to_red(
         value: float,
         min_value: float,
-        max_value: float
+        max_value: float = None
     ) -> str:
     """
     Returns an string value
@@ -318,6 +322,8 @@ def green_to_red(
     You will have to convert it in the caller code :
     ie for a decimal Discord embed color : int(hex_color, base=16)
     """
+    if max_value is None:
+        max_value = min_value * 2
     if value < min_value:
         value = min_value
     elif value > max_value:
@@ -472,19 +478,20 @@ def discord_embed_send(
     - self-refreshing embed if "engine" set
     """
     logger = logging.getLogger('rcon')
-    seen_messages: set[int] = set()
+    # seen_messages: set[int] = set()
     embeds = []
     embeds.append(embed)
 
     # Normal embed
     if engine is None:
-        embeds = []
-        embeds.append(embed)
+        # embeds = []
+        # embeds.append(embed)
         webhook.send(embeds=embeds, wait=True)
         return
 
     # Self-refreshing embed
     server_number = get_server_number()
+    seen_messages: set[int] = set()
     with discord_embed_selfrefresh_enter_session(engine) as session:
         db_message = discord_embed_selfrefresh_fetch_existing(
             session=session,
